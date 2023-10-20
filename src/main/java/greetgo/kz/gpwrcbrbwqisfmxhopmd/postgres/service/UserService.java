@@ -11,8 +11,8 @@ public interface UserService {
     List<User> getFilteredUsers(Filter filter);
     User getUserById(Long id);
     User getUserByPhoneNumber(String phoneNumber);
-    User updateUserById(Long id);
-    User updateUserByPhoneNumber(String phoneNumber);
+    User updateUserById(Long id, User updatedUser);
+    User updateUserByPhoneNumber(String phoneNumber,  User updatedUser);
     void deleteUserById(Long id);
     void deleteUserByPhoneNumber(String phoneNumber);
 }

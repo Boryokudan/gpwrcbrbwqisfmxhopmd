@@ -15,18 +15,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String fullName;
 
     private LocalDate birthDate;
 
+    @Column(columnDefinition = "DATE DEFAULT now()")
     private LocalDate registrationDate;
 
+    @Column(nullable = false)
     private String primaryPhoneNumber;
 
     private String secondaryPhoneNumber;
 
-    @PrePersist
-    public void setRegistrationDate() {
-        if (this.registrationDate == null) this.registrationDate = LocalDate.now();
-    }
+//    @PrePersist
+//    public void setRegistrationDate() {
+//        if (this.registrationDate == null) this.registrationDate = LocalDate.now();
+//    }
 }

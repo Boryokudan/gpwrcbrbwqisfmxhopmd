@@ -4,21 +4,25 @@ import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model.User;
 import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.repository.UserRepository;
 import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.UserService;
 import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.Filter;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
     @Override
     public List<User> getFilteredUsers(Filter filter) {
-        return null;
+        Pageable pageable = PageRequest.of(filter.getOffset(), filter.getLimit());
+        Page<User> page = userRepository.findAll(pageable);
+        return page.getContent();
     }
 
     @Override
@@ -57,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     private User updateCredentials(User existing, User updated) {
         if (existing != null) {
-            if (updated.getName() != null) existing.setName(updated.getName());
+            if (updated.getFullName() != null) existing.setFullName(updated.getFullName());
             if (updated.getBirthDate() != null) existing.setBirthDate(updated.getBirthDate());
             if (updated.getPrimaryPhoneNumber() != null) existing.setPrimaryPhoneNumber(updated.getPrimaryPhoneNumber());
             if (updated.getSecondaryPhoneNumber() != null) existing.setSecondaryPhoneNumber(updated.getSecondaryPhoneNumber());

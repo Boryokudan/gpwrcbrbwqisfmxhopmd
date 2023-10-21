@@ -5,6 +5,8 @@ import lombok.Setter;
 
 @Getter @Setter
 public class Filter {
+
     private int limit;
+
     private int offset;
 }

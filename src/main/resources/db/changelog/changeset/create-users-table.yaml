@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-table
+      author: z.yermukhamet
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: full_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birthdate
+                  type: date
+              - column:
+                  name: registration_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: primary_phone_number
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: secondary_phone_number
+                  type: varchar(20)
+                  constraints:
+                    nullable: true

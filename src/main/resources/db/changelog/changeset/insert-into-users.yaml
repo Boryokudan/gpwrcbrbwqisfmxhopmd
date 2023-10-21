@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-users
+      author: z.yermukhamet
+      changes:
+        - sqlFile:
+            dbms: 'postgresql'
+            path: sql/insert-users.sql

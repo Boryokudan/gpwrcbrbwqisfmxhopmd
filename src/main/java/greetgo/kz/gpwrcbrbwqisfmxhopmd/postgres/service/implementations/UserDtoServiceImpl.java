@@ -35,12 +35,14 @@ public class UserDtoServiceImpl implements UserDtoService {
     }
 
     @Override
-    public UserDto updateUserDtoById(Long id, User updatedUser) {
+    public UserDto updateUserDtoById(Long id, UserDto updatedUserDto) {
+        User updatedUser = mapper.toEntity(updatedUserDto);
         return mapper.toDto(userService.updateUserById(id, updatedUser));
     }
 
     @Override
-    public UserDto updateUserDtoByPhoneNumber(String phoneNumber, User updatedUser) {
+    public UserDto updateUserDtoByPhoneNumber(String phoneNumber, UserDto updatedUserDto) {
+        User updatedUser = mapper.toEntity(updatedUserDto);
         return mapper.toDto(userService.updateUserByPhoneNumber(phoneNumber, updatedUser));
     }
 

@@ -17,10 +17,12 @@ databaseChangeLog:
                   name: full_name
                   type: varchar(200)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: birthdate
                   type: date
+                  constraints:
+                    nullable: true
               - column:
                   name: registration_date
                   type: date

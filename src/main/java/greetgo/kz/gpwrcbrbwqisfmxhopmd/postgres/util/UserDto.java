@@ -11,9 +11,9 @@ public class UserDto {
 
     private Long id;
 
-    private String name;
+    private String fullName;
 
-    private LocalDate birthDate;
+    private LocalDate birthdate;
 
     private LocalDate registrationDate;
 

@@ -17,7 +17,7 @@ public class User {
 
     private String fullName;
 
-    private LocalDate birthDate;
+    private LocalDate birthdate;
 
     @Column(columnDefinition = "DATE DEFAULT now()")
     private LocalDate registrationDate;

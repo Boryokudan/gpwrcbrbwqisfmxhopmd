@@ -4,10 +4,10 @@ import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model.User;
 import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.repository.UserRepository;
 import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.UserService;
 import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.Filter;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.FilteredPage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,9 +20,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getFilteredUsers(Filter filter) {
-        Pageable pageable = PageRequest.of(filter.getOffset(), filter.getLimit());
-        Page<User> page = userRepository.findAll(pageable);
-        return page.getContent();
+        Pageable pageable = new FilteredPage(filter, Sort.by(Sort.Direction.ASC, "id"));
+        return userRepository.findAll(pageable).getContent();
     }
 
     @Override
@@ -61,10 +60,10 @@ public class UserServiceImpl implements UserService {
 
     private User updateCredentials(User existing, User updated) {
         if (existing != null) {
-            if (updated.getFullName() != null) existing.setFullName(updated.getFullName());
-            if (updated.getBirthDate() != null) existing.setBirthDate(updated.getBirthDate());
-            if (updated.getPrimaryPhoneNumber() != null) existing.setPrimaryPhoneNumber(updated.getPrimaryPhoneNumber());
-            if (updated.getSecondaryPhoneNumber() != null) existing.setSecondaryPhoneNumber(updated.getSecondaryPhoneNumber());
+            existing.setFullName(updated.getFullName());
+            existing.setBirthdate(updated.getBirthdate());
+            existing.setPrimaryPhoneNumber(updated.getPrimaryPhoneNumber());
+            existing.setSecondaryPhoneNumber(updated.getSecondaryPhoneNumber());
         }
 
         return existing;

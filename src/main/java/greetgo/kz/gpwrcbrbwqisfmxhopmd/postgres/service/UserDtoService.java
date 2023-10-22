@@ -14,9 +14,9 @@ public interface UserDtoService {
 
     UserDto getUserDtoByPhoneNumber(String phoneNumber);
 
-    UserDto updateUserDtoById(Long id, User updatedUser);
+    UserDto updateUserDtoById(Long id, UserDto updatedUser);
 
-    UserDto updateUserDtoByPhoneNumber(String phoneNumber,  User updatedUser);
+    UserDto updateUserDtoByPhoneNumber(String phoneNumber,  UserDto updatedUser);
 
     void deleteUserDtoById(Long id);
 

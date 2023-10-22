@@ -19,8 +19,13 @@ public class PostgresUserController {
 
     @PostMapping("/filter")
     public ResponseEntity<List<UserDto>> getUsers(@RequestBody Filter filter) {
-        List<UserDto> filteredUsers = userDtoService.getFilteredUserDtos(filter);
-        if (!filteredUsers.isEmpty()) return new ResponseEntity<>(filteredUsers, HttpStatus.OK);
+        List<UserDto> filteredUsers;
+        try {
+            filteredUsers = userDtoService.getFilteredUserDtos(filter);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        if (filteredUsers != null && !filteredUsers.isEmpty()) return new ResponseEntity<>(filteredUsers, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

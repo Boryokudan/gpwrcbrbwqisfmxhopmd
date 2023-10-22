@@ -3,13 +3,13 @@ package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public class OffsetBasedPage implements Pageable {
+public class FilteredPage implements Pageable {
 
     private Filter filter;
 
     private Sort sort;
 
-    public OffsetBasedPage(Filter filter, Sort sort) {
+    public FilteredPage(Filter filter, Sort sort) {
         if (filter.getLimit() < 1) {
             throw new IllegalArgumentException("Limit must not be less than one!");
         }
@@ -42,12 +42,12 @@ public class OffsetBasedPage implements Pageable {
 
     @Override
     public Pageable next() {
-        return new OffsetBasedPage(new Filter(filter.getLimit(), filter.getOffset() + filter.getLimit()), sort);
+        return new FilteredPage(new Filter(filter.getLimit(), filter.getOffset() + filter.getLimit()), sort);
     }
 
     public Pageable previous() {
         return hasPrevious() ?
-                new OffsetBasedPage(new Filter(filter.getLimit(), filter.getOffset() - filter.getLimit()), sort): this;
+                new FilteredPage(new Filter(filter.getLimit(), filter.getOffset() - filter.getLimit()), sort): this;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class OffsetBasedPage implements Pageable {
 
     @Override
     public Pageable first() {
-        return new OffsetBasedPage(new Filter(filter.getLimit(), 0), sort);
+        return new FilteredPage(new Filter(filter.getLimit(), 0), sort);
     }
 
     @Override

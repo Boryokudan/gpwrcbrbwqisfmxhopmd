@@ -1,21 +1,21 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service;
 
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.Filter;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.UserDto;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.common.Filter;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.PostgresUserDto;
 
 import java.util.List;
 
-public interface UserDtoService {
+public interface PostgresUserDtoService {
 
-    List<UserDto> getFilteredUserDtos(Filter filter);
+    List<PostgresUserDto> getFilteredUserDtos(Filter filter);
 
-    UserDto getUserDtoById(Long id);
+    PostgresUserDto getUserDtoById(Long id);
 
-    UserDto getUserDtoByPhoneNumber(String phoneNumber);
+    PostgresUserDto getUserDtoByPhoneNumber(String phoneNumber);
 
-    UserDto updateUserDtoById(Long id, UserDto updatedUser);
+    PostgresUserDto updateUserDtoById(Long id, PostgresUserDto updatedUser);
 
-    UserDto updateUserDtoByPhoneNumber(String phoneNumber,  UserDto updatedUser);
+    PostgresUserDto updateUserDtoByPhoneNumber(String phoneNumber, PostgresUserDto updatedUser);
 
     void deleteUserDtoById(Long id);
 

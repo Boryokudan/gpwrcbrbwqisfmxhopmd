@@ -1,11 +1,11 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.implementations;
 
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.mapper.UserMapper;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model.User;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.UserDtoService;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.UserService;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.Filter;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.UserDto;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.mapper.PostgresUserMapper;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model.PostgresUser;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.PostgresUserDtoService;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.PostgresUserService;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.common.Filter;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.PostgresUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,46 +13,46 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserDtoServiceImpl implements UserDtoService {
+public class PostgresUserDtoServiceImpl implements PostgresUserDtoService {
 
-    private final UserService userService;
+    private final PostgresUserService postgresUserService;
 
-    private final UserMapper mapper;
+    private final PostgresUserMapper mapper;
 
     @Override
-    public List<UserDto> getFilteredUserDtos(Filter filter) {
-        return mapper.toDtoList(userService.getFilteredUsers(filter));
+    public List<PostgresUserDto> getFilteredUserDtos(Filter filter) {
+        return mapper.toDtoList(postgresUserService.getFilteredUsers(filter));
     }
 
     @Override
-    public UserDto getUserDtoById(Long id) {
-        return mapper.toDto(userService.getUserById(id));
+    public PostgresUserDto getUserDtoById(Long id) {
+        return mapper.toDto(postgresUserService.getUserById(id));
     }
 
     @Override
-    public UserDto getUserDtoByPhoneNumber(String phoneNumber) {
-        return mapper.toDto(userService.getUserByPhoneNumber(phoneNumber));
+    public PostgresUserDto getUserDtoByPhoneNumber(String phoneNumber) {
+        return mapper.toDto(postgresUserService.getUserByPhoneNumber(phoneNumber));
     }
 
     @Override
-    public UserDto updateUserDtoById(Long id, UserDto updatedUserDto) {
-        User updatedUser = mapper.toEntity(updatedUserDto);
-        return mapper.toDto(userService.updateUserById(id, updatedUser));
+    public PostgresUserDto updateUserDtoById(Long id, PostgresUserDto updatedUserDto) {
+        PostgresUser updatedUser = mapper.toEntity(updatedUserDto);
+        return mapper.toDto(postgresUserService.updateUserById(id, updatedUser));
     }
 
     @Override
-    public UserDto updateUserDtoByPhoneNumber(String phoneNumber, UserDto updatedUserDto) {
-        User updatedUser = mapper.toEntity(updatedUserDto);
-        return mapper.toDto(userService.updateUserByPhoneNumber(phoneNumber, updatedUser));
+    public PostgresUserDto updateUserDtoByPhoneNumber(String phoneNumber, PostgresUserDto updatedUserDto) {
+        PostgresUser updatedUser = mapper.toEntity(updatedUserDto);
+        return mapper.toDto(postgresUserService.updateUserByPhoneNumber(phoneNumber, updatedUser));
     }
 
     @Override
     public void deleteUserDtoById(Long id) {
-        userService.deleteUserById(id);
+        postgresUserService.deleteUserById(id);
     }
 
     @Override
     public void deleteUserDtoByPhoneNumber(String phoneNumber) {
-        userService.deleteUserByPhoneNumber(phoneNumber);
+        postgresUserService.deleteUserByPhoneNumber(phoneNumber);
     }
 }

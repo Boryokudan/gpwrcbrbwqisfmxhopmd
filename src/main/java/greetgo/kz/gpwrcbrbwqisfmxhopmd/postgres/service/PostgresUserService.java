@@ -1,23 +1,21 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service;
 
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model.User;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.Filter;
-import org.springframework.stereotype.Service;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model.PostgresUser;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.common.Filter;
 
 import java.util.List;
 
-@Service
-public interface UserService {
+public interface PostgresUserService {
 
-    List<User> getFilteredUsers(Filter filter);
+    List<PostgresUser> getFilteredUsers(Filter filter);
 
-    User getUserById(Long id);
+    PostgresUser getUserById(Long id);
 
-    User getUserByPhoneNumber(String phoneNumber);
+    PostgresUser getUserByPhoneNumber(String phoneNumber);
 
-    User updateUserById(Long id, User updatedUser);
+    PostgresUser updateUserById(Long id, PostgresUser updatedUser);
 
-    User updateUserByPhoneNumber(String phoneNumber,  User updatedUser);
+    PostgresUser updateUserByPhoneNumber(String phoneNumber, PostgresUser updatedUser);
 
     void deleteUserById(Long id);
 

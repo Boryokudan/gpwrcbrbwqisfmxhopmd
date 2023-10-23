@@ -1,8 +1,8 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.controller;
 
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.UserDtoService;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.Filter;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.UserDto;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.PostgresUserDtoService;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.common.Filter;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.PostgresUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostgresUserController {
 
-    private final UserDtoService userDtoService;
+    private final PostgresUserDtoService postgresUserDtoService;
 
     @PostMapping("/filter")
-    public ResponseEntity<List<UserDto>> getUsers(@RequestBody Filter filter) {
-        List<UserDto> filteredUsers;
+    public ResponseEntity<List<PostgresUserDto>> getFilteredUsers(@RequestBody Filter filter) {
+        List<PostgresUserDto> filteredUsers;
         try {
-            filteredUsers = userDtoService.getFilteredUserDtos(filter);
+            filteredUsers = postgresUserDtoService.getFilteredUserDtos(filter);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -30,32 +30,42 @@ public class PostgresUserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") Long id) {
-        UserDto userDto = userDtoService.getUserDtoById(id);
-        if (userDto != null) return new ResponseEntity<>(userDto, HttpStatus.OK);
+    public ResponseEntity<PostgresUserDto> getUserById(@PathVariable(name = "id") Long id) {
+        PostgresUserDto postgresUserDto = postgresUserDtoService.getUserDtoById(id);
+        if (postgresUserDto != null) return new ResponseEntity<>(postgresUserDto, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<UserDto> updateUserById(@PathVariable(name = "id") Long id, @RequestBody UserDto updatedUserDto) {
-        UserDto userDto = userDtoService.updateUserDtoById(id, updatedUserDto);
+    public ResponseEntity<PostgresUserDto> updateUserById(@PathVariable(name = "id") Long id, @RequestBody PostgresUserDto updatedUserDto) {
+        PostgresUserDto userDto = postgresUserDtoService.updateUserDtoById(id, updatedUserDto);
         if (userDto != null) return new ResponseEntity<>(userDto, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @DeleteMapping("{id}")
+    public void deleteUserById(@PathVariable(name = "id") Long id) {
+        postgresUserDtoService.deleteUserDtoById(id);
+    }
+
     @GetMapping("/phone/{phoneNumber}")
-    public ResponseEntity<UserDto> getUserByPhoneNumber(@PathVariable(name = "phoneNumber") String phoneNumber) {
-        UserDto userDto = userDtoService.getUserDtoByPhoneNumber(phoneNumber);
+    public ResponseEntity<PostgresUserDto> getUserByPhoneNumber(@PathVariable(name = "phoneNumber") String phoneNumber) {
+        PostgresUserDto userDto = postgresUserDtoService.getUserDtoByPhoneNumber(phoneNumber);
         if (userDto != null) return new ResponseEntity<>(userDto, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/phone/{phoneNumber}")
-    public ResponseEntity<UserDto> updateUserByPhoneNumber(
+    public ResponseEntity<PostgresUserDto> updateUserByPhoneNumber(
             @PathVariable(name = "phoneNumber") String phoneNumber,
-            @RequestBody UserDto updatedUserDto) {
-        UserDto userDto = userDtoService.updateUserDtoByPhoneNumber(phoneNumber, updatedUserDto);
+            @RequestBody PostgresUserDto updatedUserDto) {
+        PostgresUserDto userDto = postgresUserDtoService.updateUserDtoByPhoneNumber(phoneNumber, updatedUserDto);
         if (userDto != null) return new ResponseEntity<>(userDto, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/phone/{phoneNumber}")
+    public void deleteUserBPhoneNumber(@PathVariable(name = "phoneNumber") String phoneNumber) {
+        postgresUserDtoService.deleteUserDtoByPhoneNumber(phoneNumber);
     }
 }

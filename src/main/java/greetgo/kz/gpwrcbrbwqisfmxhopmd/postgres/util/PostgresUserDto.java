@@ -1,11 +1,15 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
-public class UserDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class PostgresUserDto {
 
     private Long id;
 

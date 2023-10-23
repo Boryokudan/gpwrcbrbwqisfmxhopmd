@@ -1,14 +1,18 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
 @Data
-public class User {
+@NoArgsConstructor
+@AllArgsConstructor
+public class PostgresUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

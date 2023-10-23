@@ -1,4 +1,4 @@
-package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util;
+package greetgo.kz.gpwrcbrbwqisfmxhopmd.common;
 
 import lombok.Data;
 import org.springframework.data.domain.Pageable;

@@ -1,10 +1,10 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.implementations;
 
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model.User;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.repository.UserRepository;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.UserService;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.Filter;
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.FilteredPage;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model.PostgresUser;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.repository.PostgresUserRepository;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service.PostgresUserService;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.common.Filter;
+import greetgo.kz.gpwrcbrbwqisfmxhopmd.common.FilteredPage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,58 +14,59 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class PostgresUserServiceImpl implements PostgresUserService {
 
-    private final UserRepository userRepository;
+    private final Sort DEFAULT_SORT = Sort.by(Sort.Direction.ASC, "id");
+
+    private final PostgresUserRepository postgresUserRepository;
 
     @Override
-    public List<User> getFilteredUsers(Filter filter) {
-        Pageable pageable = new FilteredPage(filter, Sort.by(Sort.Direction.ASC, "id"));
-        return userRepository.findAll(pageable).getContent();
+    public List<PostgresUser> getFilteredUsers(Filter filter) {
+        Pageable pageable = new FilteredPage(filter, DEFAULT_SORT);
+        return postgresUserRepository.findAll(pageable).getContent();
     }
 
     @Override
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public PostgresUser getUserById(Long id) {
+        return postgresUserRepository.findById(id).orElse(null);
     }
 
     @Override
-    public User getUserByPhoneNumber(String phoneNumber) {
-        return userRepository.findUserByPrimaryOrSecondaryPhoneNumber(phoneNumber);
+    public PostgresUser getUserByPhoneNumber(String phoneNumber) {
+        return postgresUserRepository.findUserByPrimaryOrSecondaryPhoneNumber(phoneNumber);
     }
 
     @Override
-    public User updateUserById(Long id, User updatedUser) {
-        User user = userRepository.findById(id).orElse(null);
-        user = updateCredentials(user, updatedUser);
-        return user != null ? userRepository.save(user) : null;
+    public PostgresUser updateUserById(Long id, PostgresUser updatedUser) {
+        PostgresUser existingUser = postgresUserRepository.findById(id).orElse(null);
+        existingUser = updateCredentials(existingUser, updatedUser);
+        return existingUser != null ? postgresUserRepository.save(existingUser) : null;
     }
 
     @Override
-    public User updateUserByPhoneNumber(String phoneNumber,  User updatedUser) {
-        User user = userRepository.findUserByPrimaryOrSecondaryPhoneNumber(phoneNumber);
-        user = updateCredentials(user, updatedUser);
-        return user != null ? userRepository.save(user) : null;
+    public PostgresUser updateUserByPhoneNumber(String phoneNumber, PostgresUser updatedUser) {
+        PostgresUser existingUser = postgresUserRepository.findUserByPrimaryOrSecondaryPhoneNumber(phoneNumber);
+        existingUser = updateCredentials(existingUser, updatedUser);
+        return existingUser != null ? postgresUserRepository.save(existingUser) : null;
     }
 
     @Override
     public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
+        postgresUserRepository.deleteById(id);
     }
 
     @Override
     public void deleteUserByPhoneNumber(String phoneNumber) {
-        userRepository.deleteUserByPrimaryOrSecondaryPhoneNumber(phoneNumber);
+        postgresUserRepository.deleteUserByPrimaryOrSecondaryPhoneNumber(phoneNumber);
     }
 
-    private User updateCredentials(User existing, User updated) {
+    private PostgresUser updateCredentials(PostgresUser existing, PostgresUser updated) {
         if (existing != null) {
             existing.setFullName(updated.getFullName());
             existing.setBirthdate(updated.getBirthdate());
             existing.setPrimaryPhoneNumber(updated.getPrimaryPhoneNumber());
             existing.setSecondaryPhoneNumber(updated.getSecondaryPhoneNumber());
         }
-
         return existing;
     }
 }

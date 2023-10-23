@@ -1,8 +1,10 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util;
 
+import lombok.Data;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+@Data
 public class FilteredPage implements Pageable {
 
     private Filter filter;

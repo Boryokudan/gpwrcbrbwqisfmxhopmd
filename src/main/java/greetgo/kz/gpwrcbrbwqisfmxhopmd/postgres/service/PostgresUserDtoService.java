@@ -1,6 +1,5 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.service;
 
-import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model.User;
 import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.Filter;
 import greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.util.UserDto;
 

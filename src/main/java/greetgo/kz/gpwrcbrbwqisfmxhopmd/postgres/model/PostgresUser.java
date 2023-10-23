@@ -1,14 +1,13 @@
 package greetgo.kz.gpwrcbrbwqisfmxhopmd.postgres.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
-@Getter @Setter
+@Data
 public class User {
 
     @Id
@@ -19,16 +18,9 @@ public class User {
 
     private LocalDate birthdate;
 
-    @Column(columnDefinition = "DATE DEFAULT now()")
     private LocalDate registrationDate;
 
-    @Column(nullable = false)
     private String primaryPhoneNumber;
 
     private String secondaryPhoneNumber;
-
-//    @PrePersist
-//    public void setRegistrationDate() {
-//        if (this.registrationDate == null) this.registrationDate = LocalDate.now();
-//    }
 }

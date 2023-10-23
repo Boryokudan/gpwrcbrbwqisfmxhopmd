@@ -2,7 +2,9 @@ HELP.md
 .gradle
 build/
 data/postgres/*
+!data/postgres/.gitkeep
 data/mongo/*
+!data/mongo/.gitkeep
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

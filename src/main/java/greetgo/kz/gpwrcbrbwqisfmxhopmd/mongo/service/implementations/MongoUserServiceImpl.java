@@ -57,7 +57,8 @@ public class MongoUserServiceImpl implements MongoUserService {
 
     @Override
     public void deleteUserByPhoneNumber(String phoneNumber) {
-        mongoUserRepository.deleteUserByPrimaryOrSecondaryPhoneNumber(phoneNumber);
+        MongoUser existingUser = mongoUserRepository.findUserByPrimaryOrSecondaryPhoneNumber(phoneNumber);
+        if (existingUser != null) mongoUserRepository.delete(existingUser);
     }
 
     private MongoUser updateCredentials(MongoUser existing, MongoUser updated) {

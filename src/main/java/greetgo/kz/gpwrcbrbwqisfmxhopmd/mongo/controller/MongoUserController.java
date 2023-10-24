@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/mongo")
+@RequestMapping("/api/mongo")
 @RequiredArgsConstructor
 public class MongoUserController {
 
     private final MongoUserDtoService mongoUserDtoService;
 
     @PostMapping("/filter")
-    public ResponseEntity<List<MongoUserDto>> getUsers(@RequestBody Filter filter) {
+    public ResponseEntity<List<MongoUserDto>> getFilteredUsers(@RequestBody Filter filter) {
         List<MongoUserDto> filteredUsers;
         try {
             filteredUsers = mongoUserDtoService.getFilteredUserDtos(filter);

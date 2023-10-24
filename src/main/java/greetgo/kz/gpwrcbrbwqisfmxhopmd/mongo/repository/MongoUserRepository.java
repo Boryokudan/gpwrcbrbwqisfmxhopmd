@@ -12,7 +12,4 @@ public interface MongoUserRepository extends MongoRepository<MongoUser, String> 
 
     @Query("{$or:[ {'primaryPhoneNumber': ?0}, {'secondaryPhoneNumber': ?0} ]}")
     MongoUser findUserByPrimaryOrSecondaryPhoneNumber(String phoneNumber);
-
-    @Query("{$or:[ {'primaryPhoneNumber': ?0}, {'secondaryPhoneNumber': ?0} ]}")
-    void deleteUserByPrimaryOrSecondaryPhoneNumber(String phoneNumber);
 }

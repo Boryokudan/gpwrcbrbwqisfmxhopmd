@@ -228,7 +228,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/mongo/65375302a913376a2737429f",
+							"raw": "http://localhost:8080/api/mongo/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -237,7 +237,7 @@
 							"path": [
 								"api",
 								"mongo",
-								"65375302a913376a2737429f"
+								""
 							]
 						}
 					},
@@ -258,7 +258,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/mongo/65375302a913376a2737429f",
+							"raw": "http://localhost:8080/api/mongo/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -267,7 +267,7 @@
 							"path": [
 								"api",
 								"mongo",
-								"65375302a913376a2737429f"
+								""
 							]
 						}
 					},

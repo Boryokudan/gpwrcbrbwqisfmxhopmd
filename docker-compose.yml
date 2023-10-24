@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: gpwrcbrbwqisfmxhopmd
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - ./data/postgres/postgresql:/var/lib/postgresql/data
 
@@ -22,7 +22,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: mongoroot
       MONGO_INITDB_DATABASE: gpwrcbrbwqisfmxhopmd
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - ./data/mongo:/data/db
       - ./config/init_mongo.js:/docker-entrypoint-initdb.d/init_mongo.js

@@ -1,7 +1,92 @@
-greetgo!
+                        README - gpwrcbrbwqisfmxhopmd
 
-docker pull mongo
-docker run -d --name mongo-gpwrcbrbwqisfmxhopmd -e MONGO_INITDB_DATABASE=gpwrcbrbwqisfmxhopmd  -p 27017:27017 mongo
+Для сборки, запуска и тестирования данного проекта понадобятся: 
 
-docker pull postgres
-docker run -d --name postgres-gpwrcbrbwqisfmxhopmd -p 5432:5432 -e POSTGRES_DB=gpwrcbrbwqisfmxhopmd -e POSTGRES_PASSWORD=postgres postgres
+Java 17;
+
+Docker;
+
+Postman;
+
+Также перед тем как приступить к сборке и запуске необходимо убедиться в следующем:
+
+1. Java 17 добавлена в переменные окружения и команда “java” доступна в эмуляторе терминала;
+
+2. Docker демон запущен;
+
+3. Порты для Tomcat (8080), PostgreSQL (5433) и MongoDB (27018) не заняты и не прослушиваются другими процессами (порты по умолчанию 5432 для PostgreSQL и 27017 для MongoDB были намеренно изменены для предотвращения конфликтов на локальной машине, однако стоит проверить и убедиться, что и эти порты свободны);
+
+**Перед проверкой эндпоинтов через Postman, пожалуйста, ознакомьтесь с пунктом 11.2.**
+
+                                Сборка и запуск
+
+1. Копируем ссылку на удаленный репозиторий (в меню репозитория: Code -> HTTPS);
+
+    1.1 Открываем эмулятор терминала и переходим в каталог на локальной машине, в который хотим клонировать проект;
+
+    1.2 Запускаем команду git clone https://github.com/Boryokudan/gpwrcbrbwqisfmxhopmd.git
+
+
+2. Ожидаем завершения процесса и переходим в клонированный каталог (**cd gpwrcbrbwqisfmxhopmd**)
+
+
+3. Запускаем команду Docker для запуска контейнеров (**docker-compose up -d**)
+
+
+4. Запускаем команду сборщика Gradle (**./gradlew build**) для сборки проекта
+
+
+5. Запускаем сгенерированный .jar-файл командой **java -jar build/libs/gpwrcbrbwqisfmxhopmd-0.0.1-SNAPSHOT.jar** 
+
+					Тестированиe
+
+6. Открываем Postman и переходим в нужный Workspace или создаем новый
+
+
+7. Переходим во вкладку Collections и жмем на Import
+
+
+8. С помощью проводника находим файл gpwrcbrbwqisfmxhopmd.postman_collection.json, по пути /gpwrcbrbwqisfmxhopmd/config/
+
+
+9. В импортированной коллекции будут доступны 2 папки каждая из которых представляет собой совокупность запросов к той или иной базе данных
+
+
+10. Postgres - /api/postgres/* :
+
+10.1 getFilteredUsers (/api/postgres/filter)  - **POST** запрос, в теле которого находится JSON-объект с полями “offset” и “limit”. Возвращает соответствующие этим полям записи из базы данных PostgreSQL
+
+10.2 getUserById (/api/postgres/{id}) - **GET** запрос, передающий ID в качестве переменной пути
+
+10.3 updateUserById (/api/postgres/{id})- **PUT** запрос, передающий ID в качестве переменной пути, а также измененный JSON-объект в теле запроса
+
+10.4 deleteUserById (/api/postgres/{id}) - **DELETE** запрос, передающий ID в качестве переменной пути
+
+10.5 getUserByPhoneNumber (/api/postgres/phone/{phoneNumber}) - **GET** запрос, передающий номер телефона в качестве переменной пути
+
+10.6 updateUserByPhoneNumber (/api/postgres/phone/{phoneNumber})- **PUT** запрос, передающий номер телефона в качестве переменной пути, а также измененный JSON-объект в теле запроса
+
+10.7 deleteUserByPhoneNumber (/api/postgres/{id}) - **DELETE** запрос, передающий ID в качестве переменной пути
+
+Mongo - /api/mongo/* :
+
+11.1 getFilteredUsers (/api/mongo/filter)  - **POST** запрос, в теле которого находится JSON-объект с полями “offset” и “limit”. Возвращает соответствующие этим полям записи из базы данных MongoDB
+
+11.2 **ВАЖНО:** нереляционная база данных MongoDB использует в качестве первых ключей по умолчанию не привычные целочисленные значения, а 24-символьные шестнадцатеричные строки, каждая из которых является уникальной. Поэтому, **в следующих трех запросах, пожалуйста, в качестве {id} используйте id любой записи из списка, возвращаемого запросом getFilteredUsers** из пункта 11.1.
+
+Все URI при импорте будут иметь следующий вид:
+http://localhost:8080/api/mongo/
+Необходимо добавить любой id из списка, возвращаемого запросом getFilteredUsers так, чтобы URI выглядел следующим образом:
+Пример: http://localhost:8080/api/mongo/653785f490001e589839880b
+
+11.3 getUserById (/api/mongo/{id}) - **GET** запрос, передающий ID в качестве переменной пути
+
+11.4 updateUserById (/api/mongo/{id})- **PUT** запрос, передающий ID в качестве переменной пути, а также измененный JSON-объект в теле запроса
+
+11.5 deleteUserById (/api/mongo/{id}) - **DELETE** запрос, передающий ID в качестве переменной пути
+
+11.6 getUserByPhoneNumber (/api/mongo/phone/{phoneNumber}) - **GET** запрос, передающий номер телефона в качестве переменной пути
+
+11.7 updateUserByPhoneNumber (/api/mongo/phone/{phoneNumber})- **PUT** запрос, передающий номер телефона в качестве переменной пути, а также измененный JSON-объект в теле запроса
+
+11.8 deleteUserByPhoneNumber (/api/mongo/{id}) - **DELETE** запрос, передающий ID в качестве переменной пути

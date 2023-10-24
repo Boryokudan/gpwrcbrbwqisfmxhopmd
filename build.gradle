@@ -35,6 +35,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+springBoot {
+    mainClass = 'greetgo.kz.gpwrcbrbwqisfmxhopmd.GpwrcbrbwqisfmxhopmdApplication'
+}
+
 tasks.named('test') {
 	useTestNG()
 }

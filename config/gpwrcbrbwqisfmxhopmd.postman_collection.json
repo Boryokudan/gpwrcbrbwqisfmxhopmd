@@ -228,7 +228,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/mongo/",
+							"raw": "http://localhost:8080/api/mongo/65375302a913376a2737429f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -237,7 +237,7 @@
 							"path": [
 								"api",
 								"mongo",
-								""
+								"65375302a913376a2737429f"
 							]
 						}
 					},
@@ -258,7 +258,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/mongo/",
+							"raw": "http://localhost:8080/api/mongo/65375302a913376a2737429f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -267,7 +267,7 @@
 							"path": [
 								"api",
 								"mongo",
-								""
+								"65375302a913376a2737429f"
 							]
 						}
 					},
@@ -300,7 +300,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/mongo/phone/+7(775)577-57-22",
+							"raw": "http://localhost:8080/api/mongo/phone/+7(701)315-58-02",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -310,7 +310,7 @@
 								"api",
 								"mongo",
 								"phone",
-								"+7(775)577-57-22"
+								"+7(701)315-58-02"
 							]
 						}
 					},
@@ -321,8 +321,17 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"Timur Rinat\",\n    \"birthdate\": \"1996-10-10\",\n    \"primaryPhoneNumber\": \"+7(701)315-58-02\",\n    \"secondaryPhoneNumber\": \"+7(727)265-23-26\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/api/mongo/phone/+7(775)577-57-22",
+							"raw": "http://localhost:8080/api/mongo/phone/+7(701)315-58-02",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -332,7 +341,7 @@
 								"api",
 								"mongo",
 								"phone",
-								"+7(775)577-57-22"
+								"+7(701)315-58-02"
 							]
 						}
 					},
@@ -344,7 +353,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/mongo/phone/+7(775)577-57-22",
+							"raw": "http://localhost:8080/api/mongo/phone/+7(701)315-58-02",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -354,7 +363,7 @@
 								"api",
 								"mongo",
 								"phone",
-								"+7(775)577-57-22"
+								"+7(701)315-58-02"
 							]
 						}
 					},
